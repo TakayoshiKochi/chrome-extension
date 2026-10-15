@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pomodoro</title><link rel="stylesheet" href="popup.css"></head>
+<body>
+  <header><div class="brand"><img src="icons/tomato-32.png" width="28" height="28" alt=""><span>pomodoro<span class="subtitle">A LITTLE TIME, WELL SPENT.</span></span></div><span class="edition">FOCUS TIMER</span></header>
+  <main>
+    <nav aria-label="タイマーの種類"><button data-mode="focus" aria-pressed="true">集中 <small>25</small></button><button data-mode="short" aria-pressed="false">短い休憩 <small>5</small></button><button data-mode="long" aria-pressed="false">長い休憩 <small>15</small></button></nav>
+    <section class="display" aria-label="タイマー">
+      <div class="display-top"><span id="status">準備できました</span><span id="mode-label">FOCUS SESSION</span></div>
+      <div id="time" role="timer" aria-label="残り時間">25:00</div>
+      <div class="bar-caption"><span>経過時間</span><span id="percent">0%</span></div>
+      <div id="bar" role="progressbar" aria-label="経過時間" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="segments"></div></div>
+      <div class="scale"><span>0</span><span id="quarter">5</span><span id="half">10</span><span id="three-quarter">15</span><span id="end">25 min</span></div>
+    </section>
+    <div class="controls"><button id="toggle" class="primary" disabled>はじめる <span>▶</span></button><button id="reset" aria-label="タイマーをリセット" title="リセット" disabled>↺</button></div>
+    <p id="hint" aria-live="polite">ひとつのことに、集中しよう。</p>
+  </main>
+  <footer><span><i></i> <span id="completed">0</span> 回の集中を完了</span><span>ひと息ずつ、前へ。</span></footer>
+  <script src="popup.js"></script>
+</body>
+</html>
