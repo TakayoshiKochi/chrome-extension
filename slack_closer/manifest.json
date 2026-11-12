@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Slack Closer",
+  "version": "1.0.0",
+  "description": "Closes a tab when it hands off a link to the Slack desktop app.",
+  "permissions": ["webNavigation"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.slack.com/*", "https://slack.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
