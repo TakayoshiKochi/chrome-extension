@@ -8,11 +8,14 @@ A small Manifest V3 Chrome extension that closes the originating tab when it nav
 2. Enable **Developer mode**.
 3. Choose **Load unpacked** and select this `slack_closer` folder.
 
-## Behavior and limitation
+## Behavior and settings
 
-The extension closes the originating tab either when any frame navigates to Slack's `slack:` protocol or when visible page text contains **“We’ve redirected you to the desktop app.”** (straight and curly apostrophes are both recognized). It does not close a Slack HTTPS page just because it loaded; the redirect notice must appear, or the browser must begin a `slack:` handoff.
+Click the extension icon to choose a mode:
 
-A content script watches `https://*.slack.com/*` and `https://slack.com/*` for the notice. Chrome does not expose whether the desktop app ultimately finished launching; the visible notice is used as the requested signal. The `webNavigation` permission is used for direct `slack:` protocol handoffs.
+- **Desktop app** (default): close the originating tab when Slack displays **“We’ve redirected you to the desktop app.”** or begins a `slack:` protocol handoff.
+- **Browser**: leave the tab open after the handoff notice. Slack may still launch its desktop app; this setting controls whether Slack Closer closes the tab, not Slack’s own app-launch behavior.
+
+The preference is saved locally with `chrome.storage`. A content script watches `https://*.slack.com/*` and `https://slack.com/*` for the notice. `webNavigation` is used to detect direct `slack:` protocol handoffs. The original icon artwork is in `assets/slack-closer.svg`, with PNG sizes used by Chrome.
 
 ## Test
 
