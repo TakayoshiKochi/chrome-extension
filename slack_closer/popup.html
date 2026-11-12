@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Slack Closer</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body data-mode="app">
+    <main class="popup">
+      <header class="header">
+        <img class="brand-icon" src="assets/slack-closer-48.png" alt="" width="40" height="40">
+        <div>
+          <p class="eyebrow">SLACK CLOSER</p>
+          <h1>Link behavior</h1>
+        </div>
+      </header>
+
+      <section class="setting-card" aria-labelledby="setting-title">
+        <div class="setting-copy">
+          <p class="eyebrow">OPEN SLACK IN</p>
+          <h2 id="setting-title">Desktop app</h2>
+          <p id="setting-description" class="description">Close this tab when Slack reports the desktop handoff.</p>
+        </div>
+        <button id="mode-toggle" class="switch" type="button" role="switch" aria-checked="true" aria-label="Use Slack desktop app mode">
+          <span class="switch-track"><span class="switch-thumb"></span></span>
+        </button>
+      </section>
+
+      <div id="mode-note" class="notice" role="note">
+        Browser mode keeps the tab open. Slack may still launch its desktop app.
+      </div>
+
+      <footer class="footer">
+        <span id="status-dot" class="status-dot" aria-hidden="true"></span>
+        <span id="save-status" role="status" aria-live="polite">Loading preference…</span>
+      </footer>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

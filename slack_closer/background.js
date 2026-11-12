@@ -26,10 +26,16 @@ function closeTab(tabId) {
   });
 }
 
+function closeTabIfDesktopAppMode(tabId) {
+  chrome.storage.local.get({ redirectMode: 'app' }, settings => {
+    if (settings.redirectMode !== 'browser') closeTab(tabId);
+  });
+}
+
 chrome.webNavigation.onBeforeNavigate.addListener(({ tabId, url }) => {
   // Slack may start its desktop-app handoff from a hidden frame, so watch all frames.
   if (tabId < 0 || !isSlackDesktopUrl(url)) return;
-  closeTab(tabId);
+  closeTabIfDesktopAppMode(tabId);
 });
 
 chrome.runtime.onMessage.addListener((message, sender) => {
@@ -39,5 +45,5 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   const pageUrl = sender.url || sender.tab?.url;
   if (!Number.isInteger(tabId) || tabId < 0 || !isSlackWebUrl(pageUrl)) return;
 
-  closeTab(tabId);
+  closeTabIfDesktopAppMode(tabId);
 });

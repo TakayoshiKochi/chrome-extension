@@ -7,8 +7,14 @@ const path = require('node:path');
 function setup() {
   let navigationListener;
   let messageListener;
+  let redirectMode = 'app';
   const removedTabs = [];
   const chrome = {
+    storage: {
+      local: {
+        get(defaults, callback) { callback({ ...defaults, redirectMode }); }
+      }
+    },
     webNavigation: {
       onBeforeNavigate: {
         addListener(callback) { navigationListener = callback; }
@@ -30,6 +36,7 @@ function setup() {
   return {
     navigate: details => navigationListener(details),
     sendMessage: (message, sender) => messageListener(message, sender),
+    setMode: mode => { redirectMode = mode; },
     removedTabs
   };
 }
@@ -80,6 +87,19 @@ test('ignores redirect messages from non-Slack pages', async () => {
   app.sendMessage(
     { type: 'close-tab-after-slack-desktop-redirect' },
     { tab: { id: 25, url }, url, frameId: 0 }
+  );
+  await Promise.resolve();
+  assert.deepEqual(app.removedTabs, []);
+});
+
+test('browser mode leaves the Slack tab open after the handoff', async () => {
+  const app = setup();
+  app.setMode('browser');
+  const url = 'https://applied-stackplatform.slack.com/archives/C0BF43XG9FA/p1792436121282459';
+  app.navigate({ tabId: 26, frameId: 0, url: 'slack://channel?id=C0BF43XG9FA' });
+  app.sendMessage(
+    { type: 'close-tab-after-slack-desktop-redirect' },
+    { tab: { id: 26, url }, url, frameId: 0 }
   );
   await Promise.resolve();
   assert.deepEqual(app.removedTabs, []);
