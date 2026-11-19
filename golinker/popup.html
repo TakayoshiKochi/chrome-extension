@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>golinker</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="popup">
+      <p class="eyebrow">GOLINKER</p>
+      <h1>Go-link server</h1>
+      <p class="intro">URLs beginning with <code>go/</code> will open on this server.</p>
+
+      <form id="settings-form">
+        <label for="server-url">Server URL</label>
+        <input
+          id="server-url"
+          name="serverUrl"
+          type="url"
+          placeholder="https://go.example.com/"
+          autocomplete="url"
+          spellcheck="false"
+          required
+        >
+        <p class="hint">Use an HTTP or HTTPS URL. The shortcut path is added after it.</p>
+        <button id="save-button" type="submit">Save</button>
+      </form>
+
+      <p id="status" class="status" role="status" aria-live="polite">Loading settings…</p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
