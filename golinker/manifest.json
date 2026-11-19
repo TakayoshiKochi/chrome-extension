@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "golinker",
+  "version": "1.0.0",
+  "description": "Expand go/ shortcuts to your go-link server.",
+  "permissions": ["storage", "webNavigation"],
+  "host_permissions": ["http://go/*", "https://go/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "golinker",
+    "default_popup": "popup.html"
+  }
+}
