@@ -1,0 +1,9 @@
+{
+  "rules": [
+    {
+      "description": "Example: google.com -> www.google.com, keeping path and query",
+      "from": "^https://google\\.com/(.*)$",
+      "to": "https://www.google.com/\\1"
+    }
+  ]
+}
